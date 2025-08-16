@@ -39,6 +39,7 @@ public partial class player : CharacterBody2D
 		{
 			shotIsOnCooldown = false;
 			GD.Print("is off cooldown");
+			
 		};
 		// GD.Print(tileMap);
 		// tiledata = tileMap.GetCellTileData(0, new Vector2I(1, 1));
@@ -52,7 +53,6 @@ public partial class player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-
 		// Add the gravity.
 		// if (!IsOnFloor())
 		velocity.Y += gravity * (float)delta;

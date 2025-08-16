@@ -25,8 +25,10 @@ public partial class Projectile : CharacterBody2D, GodotLogging
 	{
 		velocity.Y += gravity * (float)delta;
 
-        Velocity = velocity;
+		Velocity = velocity;
 		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
+
+		GD.Print(Velocity);
 		
 		// if (!(collision == null))
 		// {

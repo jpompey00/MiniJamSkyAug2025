@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bhsf208pstqh"]
 
 [ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="1_uxy70"]
-[ext_resource type="Texture2D" uid="uid://bbtaxftjwkapq" path="res://assets/tile2x2.png" id="2_4pkxc"]
+[ext_resource type="Texture2D" uid="uid://b8io0a5aoq2t8" path="res://assets/BlockingTile.png" id="2_ooxkj"]
 [ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="2_vhsy8"]
-[ext_resource type="Texture2D" uid="uid://63q4xn7vlpnc" path="res://assets/tile_3x1.png" id="3_icajp"]
+[ext_resource type="Texture2D" uid="uid://csoltutx6iddx" path="res://assets/MovingTile.png" id="3_blhdo"]
 [ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="5_yx5xt"]
 [ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="6_ruljp"]
 
@@ -15,50 +15,53 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
 0:0/0/custom_data_0 = -1
 0:0/1 = 1
 0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/1/physics_layer_0/angular_velocity = 0.0
 0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/1/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_1/angular_velocity = 0.0
 0:0/3 = 3
 0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/3/physics_layer_0/angular_velocity = 0.0
 0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/3/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_1/angular_velocity = 0.0
 0:0/3/custom_data_0 = 1
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3iab6"]
-resource_name = "Tile 2x2"
-texture = ExtResource("2_4pkxc")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bk4dg"]
+texture = ExtResource("2_ooxkj")
 texture_region_size = Vector2i(32, 32)
-0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_be06k"]
-texture = ExtResource("3_icajp")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7ucf"]
+texture = ExtResource("3_blhdo")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_vbj55"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
 custom_data_layer_0/name = "tilePosition"
 custom_data_layer_0/type = 2
 sources/1 = SubResource("TileSetAtlasSource_di1i3")
-sources/2 = SubResource("TileSetAtlasSource_3iab6")
-sources/3 = SubResource("TileSetAtlasSource_be06k")
+sources/2 = SubResource("TileSetAtlasSource_bk4dg")
+sources/3 = SubResource("TileSetAtlasSource_n7ucf")
 
 [node name="Node2D" type="Node2D"]
 
@@ -67,7 +70,7 @@ texture_filter = 1
 tile_set = SubResource("TileSet_vbj55")
 rendering_quadrant_size = 32
 format = 2
-layer_0/tile_data = PackedInt32Array(65537, 1, 0, 65538, 1, 65536, 65539, 1, 65536, 65540, 1, 196608)
+layer_0/tile_data = PackedInt32Array(65537, 1, 0, 65538, 1, 65536, 65539, 1, 65536, 65540, 1, 196608, -131067, 3, 0, -65531, 3, 0, 5, 3, 0, -65540, 2, 0, -4, 2, 0, 65532, 2, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_vhsy8")]
 position = Vector2(64, 32)
