@@ -1,14 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfmtyat8s4i2l"]
+[gd_scene load_steps=10 format=3 uid="uid://dfmtyat8s4i2l"]
 
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_jylnq"]
+[ext_resource type="Texture2D" uid="uid://cvbeir4idcwkw" path="res://assets/updated_mc.png" id="2_7ebg6"]
+[ext_resource type="Texture2D" uid="uid://8yybgg47anuo" path="res://assets/arrow.png" id="3_lgb46"]
+[ext_resource type="Script" path="res://scripts/Shooter.cs" id="3_xe65c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3eho"]
 size = Vector2(30.5, 30.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn4vs"]
+atlas = ExtResource("2_7ebg6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atqtd"]
+atlas = ExtResource("2_7ebg6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67lqr"]
+atlas = ExtResource("2_7ebg6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ni4dm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn4vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atqtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67lqr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jylnq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(16, -15)
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
@@ -20,3 +53,18 @@ offset_bottom = 15.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, -16)
 shape = SubResource("RectangleShape2D_w3eho")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(16, -16)
+sprite_frames = SubResource("SpriteFrames_ni4dm")
+
+[node name="Shooter" type="Node2D" parent="."]
+position = Vector2(16, -16)
+script = ExtResource("3_xe65c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shooter"]
+texture_filter = 1
+position = Vector2(20, 0)
+texture = ExtResource("3_lgb46")
