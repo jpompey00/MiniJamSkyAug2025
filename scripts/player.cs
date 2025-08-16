@@ -62,13 +62,13 @@ public partial class player : CharacterBody2D
 			positionOnTile = (int)tiledata.GetCustomData(CustomDataNames.tilePosition.ToString());
 		}
 
-		if (Input.IsActionJustPressed(Controls.Left.ToString()) && !(positionOnTile == -1))
+		if (Input.IsActionJustPressed(Controls.Left.ToString()) && !(positionOnTile == (int)PositionOnTile.ON_LEFT_EDGE))
 		{
 			GD.Print("Left Pressed, allowed to move left");
 			Position = new Vector2(Position.X - 32, Position.Y);
 
 		}
-		if (Input.IsActionJustPressed(Controls.Right.ToString()) && !(positionOnTile == 1))
+		if (Input.IsActionJustPressed(Controls.Right.ToString()) && !(positionOnTile == (int)PositionOnTile.ON_RIGHT_EDGE))
 		{
 			GD.Print("Right Pressed, allowed to move right");
 			Position = new Vector2(Position.X + 32, Position.Y);
