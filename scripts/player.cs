@@ -46,14 +46,17 @@ public partial class player : CharacterBody2D
 
 	// Called when the node enters the scene tree for the first time.
 
-	public void getInput()
+	public void GetInput()
 	{
-		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
+		Vector2 inputDirection = Input.GetVector(Controls.Left.ToString(), Controls.Right.ToString(), Controls.Throw1.ToString(), Controls.Throw2.ToString());
+		GD.Print(inputDirection);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		//todo kyok - clean this up using this way of doing it instead of my way :D
+		// Vector2 inputDirection = Input.GetVector(Controls.Left.ToString(), Controls.Right.ToString(), Controls.Throw1.ToString(), Controls.Throw2.ToString());
 
 		//this can likely be fixed to one if statement that just changes based on the vectors of the input actions
 		//i thinks
