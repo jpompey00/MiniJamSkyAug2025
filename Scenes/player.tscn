@@ -66,5 +66,5 @@ script = ExtResource("3_xe65c")
 
 [node name="Sprite2D" type="Sprite2D" parent="Shooter"]
 texture_filter = 1
-position = Vector2(20, 0)
+position = Vector2(18, 0)
 texture = ExtResource("3_lgb46")

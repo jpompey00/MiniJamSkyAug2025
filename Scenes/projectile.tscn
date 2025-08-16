@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgk7j83475qso"]
+
+[ext_resource type="Texture2D" uid="uid://osq2088s5trq" path="res://assets/projectileplaceholder.png" id="1_nw12g"]
+[ext_resource type="Script" path="res://scripts/Projectile.cs" id="1_vikho"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7vut"]
+size = Vector2(10.8634, 11)
+
+[node name="Projectile" type="CharacterBody2D"]
+script = ExtResource("1_vikho")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_nw12g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.520421, -0.5)
+scale = Vector2(1.01634, 1)
+shape = SubResource("RectangleShape2D_e7vut")

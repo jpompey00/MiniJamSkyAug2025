@@ -85,6 +85,8 @@ public partial class player : CharacterBody2D
 		if (Input.IsActionJustPressed(Controls.Throw1.ToString()))
 		{
 			GD.Print("Throw-1 Pressed");
+			// GD.Print(Position);
+			shooter.ShootProjectile(new Vector2(Position.X +20, Position.Y));
 
 		}
 		if (Input.IsActionJustPressed(Controls.Throw2.ToString()))
