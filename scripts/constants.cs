@@ -31,6 +31,7 @@ public static class Constants
     public const String CUSTOM_DATA_TILE_POSITION = "tilePosition";
     public const int POSITION_ON_TILE_ON_LEFT_EDGE = -1;
     public const int POSITION_ON_TILE_ON_RIGHT_EDGE = 1;
+    public const float COOLDOWN_TIME_SHOT = 0.75f;
 
 }
 
