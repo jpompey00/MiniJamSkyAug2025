@@ -48,7 +48,7 @@ public partial class player : CharacterBody2D
 
 	public void GetInput()
 	{
-		Vector2 inputDirection = Input.GetVector(Controls.Left.ToString(), Controls.Right.ToString(), Controls.Throw1.ToString(), Controls.Throw2.ToString());
+		Vector2 inputDirection = Input.GetVector(Constants.CONTROLS_LEFT, Constants.CONTROLS_RIGHT, Constants.CONTROLS_THROW1, Constants.CONTROLS_THROW2);
 		GD.Print(inputDirection);
 	}
 
@@ -60,36 +60,36 @@ public partial class player : CharacterBody2D
 
 		//this can likely be fixed to one if statement that just changes based on the vectors of the input actions
 		//i thinks
-		if (Input.IsActionJustPressed(Controls.Left.ToString()) || Input.IsActionJustPressed(Controls.Right.ToString()))
+		if (Input.IsActionJustPressed(Constants.CONTROLS_LEFT) || Input.IsActionJustPressed(Constants.CONTROLS_RIGHT))
 		{
 			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
 			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
 			tiledata = tileMap.GetCellTileData(0, tileMap.LocalToMap(Position));
-			GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
-			positionOnTile = (int)tiledata.GetCustomData(CustomDataNames.tilePosition.ToString());
+			GD.Print(tiledata.GetCustomData(Constants.CUSTOM_DATA_TILE_POSITION));
+			positionOnTile = (int)tiledata.GetCustomData(Constants.CUSTOM_DATA_TILE_POSITION);
 		}
 
-		if (Input.IsActionJustPressed(Controls.Left.ToString()) && !(positionOnTile == (int)PositionOnTile.ON_LEFT_EDGE))
+		if (Input.IsActionJustPressed(Constants.CONTROLS_LEFT) && !(positionOnTile == (int)Constants.POSITION_ON_TILE_ON_LEFT_EDGE))
 		{
 			GD.Print("Left Pressed, allowed to move left");
 			// animatedSprite2D.Scale = new Vector2(-1, 1);
 			Position = new Vector2(Position.X - 32, Position.Y);
 
 		}
-		if (Input.IsActionJustPressed(Controls.Right.ToString()) && !(positionOnTile == (int)PositionOnTile.ON_RIGHT_EDGE))
+		if (Input.IsActionJustPressed(Constants.CONTROLS_RIGHT) && !(positionOnTile == (int)Constants.POSITION_ON_TILE_ON_RIGHT_EDGE))
 		{
 			GD.Print("Right Pressed, allowed to move right");
 			// animatedSprite2D.Scale = new Vector2(1, 1);
 			Position = new Vector2(Position.X + 32, Position.Y);
 		}
-		if (Input.IsActionJustPressed(Controls.Throw1.ToString()))
+		if (Input.IsActionJustPressed(Constants.CONTROLS_THROW1))
 		{
 			GD.Print("Throw-1 Pressed");
 			// GD.Print(Position);
 			shooter.ShootProjectile(new Vector2(Position.X +20, Position.Y));
 
 		}
-		if (Input.IsActionJustPressed(Controls.Throw2.ToString()))
+		if (Input.IsActionJustPressed(Constants.CONTROLS_THROW2))
 		{
 			GD.Print("Throw-2 Pressed");
 		}

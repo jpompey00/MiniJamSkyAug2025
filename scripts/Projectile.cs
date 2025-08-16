@@ -11,7 +11,7 @@ public partial class Projectile : CharacterBody2D, GodotLogging
 
 	Vector2 velocity;
 	public Vector2 direction; //set on instantiation
-	float speed = 2000f;
+	float speed = Constants.SPEED;
 
 
 	public override void _Ready()
