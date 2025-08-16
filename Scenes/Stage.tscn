@@ -1,13 +1,88 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhsf208pstqh"]
+[gd_scene load_steps=11 format=3 uid="uid://bhsf208pstqh"]
 
-[ext_resource type="PackedScene" uid="uid://c2r1phfncw51a" path="res://Scenes/tile.tscn" id="1_a8fhs"]
+[ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="1_uxy70"]
+[ext_resource type="Texture2D" uid="uid://bbtaxftjwkapq" path="res://assets/tile2x2.png" id="2_4pkxc"]
 [ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="2_vhsy8"]
+[ext_resource type="Texture2D" uid="uid://63q4xn7vlpnc" path="res://assets/tile_3x1.png" id="3_icajp"]
+[ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="5_yx5xt"]
+[ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="6_ruljp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_di1i3"]
+texture = ExtResource("1_uxy70")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/custom_data_0 = -1
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/3/custom_data_0 = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3iab6"]
+resource_name = "Tile 2x2"
+texture = ExtResource("2_4pkxc")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_be06k"]
+texture = ExtResource("3_icajp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_vbj55"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "tilePosition"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetAtlasSource_di1i3")
+sources/2 = SubResource("TileSetAtlasSource_3iab6")
+sources/3 = SubResource("TileSetAtlasSource_be06k")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("2_vhsy8")]
-position = Vector2(456, 343)
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_vbj55")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(65537, 1, 0, 65538, 1, 65536, 65539, 1, 65536, 65540, 1, 196608)
 
-[node name="Tile" parent="." instance=ExtResource("1_a8fhs")]
-position = Vector2(431, 405)
-scale = Vector2(2, 2)
+[node name="Player" parent="." instance=ExtResource("2_vhsy8")]
+position = Vector2(64, 32)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="BrickBackground" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(7.62939e-06, -2.52724e-05)
+scale = Vector2(0.266667, 0.414815)
+texture = ExtResource("5_yx5xt")
+
+[node name="Sprite2D" type="Sprite2D" parent="BrickBackground"]
+z_index = -1
+position = Vector2(-9.15527e-05, 6.09245e-05)
+scale = Vector2(1.5, 1)
+texture = ExtResource("6_ruljp")

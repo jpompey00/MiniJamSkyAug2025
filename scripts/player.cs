@@ -1,72 +1,84 @@
 using Godot;
+using Microsoft.VisualBasic;
 using System;
+using System.Reflection.Metadata;
 using System.Threading;
 
 
 public partial class player : CharacterBody2D
 {
-	// public const float Speed = 300.0f;
-	// public const float JumpVelocity = -400.0f;
+	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	TileMap tileMap;
+	TileData tiledata;
 
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	// public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	Boolean isOnRightEdge = false;
+	Boolean isOnLeftEdge = false;
+	int positionOnTile;
 
 
-	// public override void _PhysicsProcess(double delta)
-	// {
-	// 	Vector2 velocity = Velocity;
+	public override void _Ready()
+	{
+		tileMap = GetNode<TileMap>("../TileMap");
+		// GD.Print(tileMap);
+		tiledata = tileMap.GetCellTileData(0, new Vector2I(1, 1));
 
-	// 	// Add the gravity.
-	// 	if (!IsOnFloor())
-	// 		velocity.Y += gravity * (float)delta;
+		//gets the vector2I Position for this, pretty sick
+		GD.Print(Position);
+		GD.Print(tileMap.LocalToMap(Position));
 
-	// 	// Handle Jump.
-	// 	if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-	// 		velocity.Y = JumpVelocity;
+	}
 
-	// 	// Get the input direction and handle the movement/deceleration.
-	// 	// As good practice, you should replace UI actions with custom gameplay actions.
-	// 	Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-	// 	if (direction != Vector2.Zero)
-	// 	{
-	// 		velocity.X = direction.X * Speed;
-	// 	}
-	// 	else
-	// 	{
-	// 		velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-	// 	}
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector2 velocity = Velocity;
 
-	// 	Velocity = velocity;
-	// 	MoveAndSlide();
-	// }
+		// Add the gravity.
+		// if (!IsOnFloor())
+		velocity.Y += gravity * (float)delta;
+		Velocity = velocity;
+		MoveAndSlide();
+	}
 
 
 	// Called when the node enters the scene tree for the first time.
 
-	public override void _Ready()
-	{
 
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed(Controls.Left.ToString()))
+
+		//this can likely be fixed to one if statement that just changes based on the vectors of the input actions
+		//i thinks
+		if (Input.IsActionJustPressed(Controls.Left.ToString()) || Input.IsActionJustPressed(Controls.Right.ToString()))
 		{
-			GD.Print("Left Pressed");
-			Position = new Vector2(Position.X-100, Position.Y);
+			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
+			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
+			tiledata = tileMap.GetCellTileData(0, tileMap.LocalToMap(Position));
+			GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
+			positionOnTile = (int)tiledata.GetCustomData(CustomDataNames.tilePosition.ToString());
 		}
-		if (Input.IsActionJustPressed(Controls.Right.ToString()))
+
+		if (Input.IsActionJustPressed(Controls.Left.ToString()) && !(positionOnTile == -1))
 		{
-			Position = new Vector2(Position.X+100, Position.Y);
+			GD.Print("Left Pressed, allowed to move left");
+			Position = new Vector2(Position.X - 32, Position.Y);
+			
+		}
+		if (Input.IsActionJustPressed(Controls.Right.ToString()) && !(positionOnTile == 1))
+		{
+			GD.Print("Right Pressed, allowed to move right");
+			Position = new Vector2(Position.X + 32, Position.Y);
 		}
 		if (Input.IsActionJustPressed(Controls.Throw1.ToString()))
 		{
 			GD.Print("Throw-1 Pressed");
+
 		}
 		if (Input.IsActionJustPressed(Controls.Throw2.ToString()))
 		{
 			GD.Print("Throw-2 Pressed");
 		}
+				
 	}
 }

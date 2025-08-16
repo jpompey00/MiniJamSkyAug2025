@@ -3,19 +3,20 @@
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_jylnq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3eho"]
-size = Vector2(40, 40)
+size = Vector2(30.5, 30.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jylnq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, -15)
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0, 1, 1, 1)
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, -16)
 shape = SubResource("RectangleShape2D_w3eho")
