@@ -5,7 +5,7 @@ public partial class Projectile : CharacterBody2D, GodotLogging
 {
 	// public const float Speed = 300.0f;
 	// public const float JumpVelocity = -400.0f;
-
+	//on colission layer 2
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
