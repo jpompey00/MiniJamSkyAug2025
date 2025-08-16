@@ -42,7 +42,10 @@ public partial class player : CharacterBody2D
 
 	// Called when the node enters the scene tree for the first time.
 
-
+	public void getInput()
+	{
+		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -63,7 +66,7 @@ public partial class player : CharacterBody2D
 		{
 			GD.Print("Left Pressed, allowed to move left");
 			Position = new Vector2(Position.X - 32, Position.Y);
-			
+
 		}
 		if (Input.IsActionJustPressed(Controls.Right.ToString()) && !(positionOnTile == 1))
 		{
@@ -79,6 +82,6 @@ public partial class player : CharacterBody2D
 		{
 			GD.Print("Throw-2 Pressed");
 		}
-				
+
 	}
 }
