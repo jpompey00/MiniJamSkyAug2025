@@ -23,7 +23,7 @@ using Godot;
 
 public static class Constants
 {
-    public const float SPEED = 2000f;
+    public const float SPEED = 750f;
     public const String CONTROLS_LEFT = "Left";
     public const String CONTROLS_RIGHT = "Right";
     public const String CONTROLS_THROW1 = "Throw1";
