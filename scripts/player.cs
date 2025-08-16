@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Reflection.Metadata;
 using System.Threading;
+using Timer = Godot.Timer;
 
 
 public partial class player : CharacterBody2D
@@ -16,6 +17,11 @@ public partial class player : CharacterBody2D
 	int positionOnTile;
 	AnimatedSprite2D animatedSprite2D;
 	Shooter shooter;
+	//add timer 
+	Timer cooldownTimer;
+	Boolean shotIsOnCooldown;
+
+
 
 
 	public override void _Ready()
@@ -23,6 +29,17 @@ public partial class player : CharacterBody2D
 		tileMap = GetNode<TileMap>("../TileMap");
 		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		shooter = GetNode<Shooter>("Shooter");
+
+		
+		cooldownTimer = new Timer();
+		// CallDeferred()
+		GetTree().CurrentScene.CallDeferred(MethodName.AddChild, cooldownTimer);
+		// AddChild(cooldownTimer);
+		cooldownTimer.Timeout += () =>
+		{
+			shotIsOnCooldown = false;
+			GD.Print("is off cooldown");
+		};
 		// GD.Print(tileMap);
 		// tiledata = tileMap.GetCellTileData(0, new Vector2I(1, 1));
 
@@ -62,8 +79,6 @@ public partial class player : CharacterBody2D
 		//i thinks
 		if (Input.IsActionJustPressed(Constants.CONTROLS_LEFT) || Input.IsActionJustPressed(Constants.CONTROLS_RIGHT))
 		{
-			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
-			// GD.Print(tiledata.GetCustomData(CustomDataNames.tilePosition.ToString()));
 			tiledata = tileMap.GetCellTileData(0, tileMap.LocalToMap(Position));
 			GD.Print(tiledata.GetCustomData(Constants.CUSTOM_DATA_TILE_POSITION));
 			positionOnTile = (int)tiledata.GetCustomData(Constants.CUSTOM_DATA_TILE_POSITION);
@@ -71,22 +86,27 @@ public partial class player : CharacterBody2D
 
 		if (Input.IsActionJustPressed(Constants.CONTROLS_LEFT) && !(positionOnTile == (int)Constants.POSITION_ON_TILE_ON_LEFT_EDGE))
 		{
-			GD.Print("Left Pressed, allowed to move left");
+			// GD.Print("Left Pressed, allowed to move left");
 			// animatedSprite2D.Scale = new Vector2(-1, 1);
 			Position = new Vector2(Position.X - 32, Position.Y);
 
 		}
 		if (Input.IsActionJustPressed(Constants.CONTROLS_RIGHT) && !(positionOnTile == (int)Constants.POSITION_ON_TILE_ON_RIGHT_EDGE))
 		{
-			GD.Print("Right Pressed, allowed to move right");
+			// GD.Print("Right Pressed, allowed to move right");
 			// animatedSprite2D.Scale = new Vector2(1, 1);
 			Position = new Vector2(Position.X + 32, Position.Y);
 		}
 		if (Input.IsActionJustPressed(Constants.CONTROLS_THROW1))
 		{
-			GD.Print("Throw-1 Pressed");
+			// GD.Print("Throw-1 Pressed");
 			// GD.Print(Position);
-			shooter.ShootProjectile(new Vector2(Position.X +20, Position.Y));
+			if (!shotIsOnCooldown)
+			{
+				shooter.ShootProjectile();
+				shotIsOnCooldown = true;
+				cooldownTimer.Start(Constants.COOLDOWN_TIME_SHOT);
+			}
 
 		}
 		if (Input.IsActionJustPressed(Constants.CONTROLS_THROW2))

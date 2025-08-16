@@ -27,13 +27,13 @@ public partial class Shooter : Node2D, GodotLogging
 		Rotation = rotationAngle;
 
 		// GD.Print(Mathf.DegToRad(rotationAngle));
-		GD.Print(directionToCursor);
+		// GD.Print(directionToCursor);
 		// GodotLogging.log(this, "Direction: " + directionToCursor);
 		// GD.Print(arrow.GlobalPosition);
 	}
 
 
-	public void ShootProjectile(Vector2 Position)
+	public void ShootProjectile()
 	{
 		// GetParent().GetParent().AddChild(projectile);
 		Projectile projectile = projetilePackedScene.Instantiate<Projectile>();
