@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bd61ysmwinm18"]
+
+[node name="PressurePlate" type="Area2D"]
