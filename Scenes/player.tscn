@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfmtyat8s4i2l"]
+
+[gd_scene load_steps=12 format=3 uid="uid://dfmtyat8s4i2l"]
+
 
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_jylnq"]
 [ext_resource type="Texture2D" uid="uid://cvbeir4idcwkw" path="res://assets/updated_mc.png" id="2_7ebg6"]
 [ext_resource type="Texture2D" uid="uid://8yybgg47anuo" path="res://assets/arrow.png" id="3_lgb46"]
 [ext_resource type="Script" path="res://scripts/Shooter.cs" id="3_xe65c"]
+[ext_resource type="Script" path="res://scripts/Trajectory.cs" id="5_la1nm"]
+[ext_resource type="Texture2D" uid="uid://dc4tipyxe6umx" path="res://assets/dotted_line.png" id="5_p0fjv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qn4vs"]
 atlas = ExtResource("2_7ebg6")
@@ -71,6 +75,13 @@ script = ExtResource("3_xe65c")
 texture_filter = 1
 position = Vector2(18, 0)
 texture = ExtResource("3_lgb46")
+
+[node name="Line2D" type="Line2D" parent="Shooter"]
+width = 5.0
+default_color = Color(1, 0, 0, 1)
+texture = ExtResource("5_p0fjv")
+texture_mode = 1
+script = ExtResource("5_la1nm")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
