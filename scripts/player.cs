@@ -57,6 +57,7 @@ public partial class player : CharacterBody2D
 	public void OnBodyEntered(Node2D node)
 	{
 		GodotLogging.log(this, node.ToString());
+		//for the pressure plate.
 	}
 
 	public override void _PhysicsProcess(double delta)
