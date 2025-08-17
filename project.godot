@@ -44,6 +44,11 @@ Throw2={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Walls"
+2d_physics/layer_3="Interactable"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

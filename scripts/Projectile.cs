@@ -28,12 +28,19 @@ public partial class Projectile : CharacterBody2D, GodotLogging
 		Velocity = velocity;
 		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
 
-		GD.Print(Velocity);
-		
+		// GD.Print(Velocity);
+
 		// if (!(collision == null))
 		// {
 
 		// velocity = velocity.Bounce(collision.GetNormal()) * .6f; 
 		// }
+	}
+
+
+	public void OnBodyEntered(Node2D node2D)
+	{
+		GodotLogging.log(this, node2D.ToString());
+		//ADD SCRIPT FOR WHEN TILE BUTTON IS INTERACTED WITH FUCKING SHIT AHHHHH
 	}
 }

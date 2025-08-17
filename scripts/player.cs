@@ -20,6 +20,9 @@ public partial class player : CharacterBody2D
 	//add timer 
 	Timer cooldownTimer;
 	Boolean shotIsOnCooldown;
+	int actionLimit = 6;
+	int baseShotLimit = 3;
+	int specialShotLimit;
 
 
 
@@ -30,7 +33,7 @@ public partial class player : CharacterBody2D
 		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		shooter = GetNode<Shooter>("Shooter");
 
-		
+
 		cooldownTimer = new Timer();
 		// CallDeferred()
 		GetTree().CurrentScene.CallDeferred(MethodName.AddChild, cooldownTimer);
@@ -39,7 +42,8 @@ public partial class player : CharacterBody2D
 		{
 			shotIsOnCooldown = false;
 			GD.Print("is off cooldown");
-			
+			cooldownTimer.Stop();
+
 		};
 		// GD.Print(tileMap);
 		// tiledata = tileMap.GetCellTileData(0, new Vector2I(1, 1));
@@ -47,7 +51,12 @@ public partial class player : CharacterBody2D
 		//gets the vector2I Position for this, pretty sick
 		// GD.Print(Position);
 		// GD.Print(tileMap.LocalToMap(Position));
+	}
 
+
+	public void OnBodyEntered(Node2D node)
+	{
+		GodotLogging.log(this, node.ToString());
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -101,11 +110,15 @@ public partial class player : CharacterBody2D
 		{
 			// GD.Print("Throw-1 Pressed");
 			// GD.Print(Position);
-			if (!shotIsOnCooldown)
+			if (!shotIsOnCooldown && actionLimit > 0 && baseShotLimit > 0)
 			{
 				shooter.ShootProjectile();
 				shotIsOnCooldown = true;
 				cooldownTimer.Start(Constants.COOLDOWN_TIME_SHOT);
+				actionLimit -= 1;
+				baseShotLimit -= 1;
+				GodotLogging.log(this, "Action Limit: " + actionLimit);
+				GodotLogging.log(this, "Base Shot Limit: " + baseShotLimit);
 			}
 
 		}

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnnibu7r7cpkv"]
+
+[ext_resource type="Texture2D" uid="uid://cfjn0uytrf8no" path="res://assets/buttton.png" id="1_l40yx"]
+[ext_resource type="Script" path="res://scripts/Button.cs" id="1_sf86f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq40n"]
+atlas = ExtResource("1_l40yx")
+region = Rect2(0, 0, 20, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo0jw"]
+atlas = ExtResource("1_l40yx")
+region = Rect2(20, 0, 20, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bswlv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq40n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo0jw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to1kp"]
+size = Vector2(16, 4)
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_sf86f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bswlv")
+frame = 1
+frame_progress = 0.345371
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2)
+shape = SubResource("RectangleShape2D_to1kp")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
