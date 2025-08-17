@@ -48,16 +48,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2mpo"]
 size = Vector2(33, 29)
 
-[node name="Enemy1" type="StaticBody2D"]
+[node name="Enemy1" type="Area2D"]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_cac11")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(22, -16)
 sprite_frames = SubResource("SpriteFrames_jv3my")
 frame_progress = 0.602537
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, 0.5)
+position = Vector2(17, -15)
 shape = SubResource("RectangleShape2D_d2mpo")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

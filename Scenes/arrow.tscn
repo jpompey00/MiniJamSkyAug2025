@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://yfihb1tmni0o"]
+
+[ext_resource type="Texture2D" uid="uid://dj1t716oa4ego" path="res://assets/continueArrow.png" id="1_41un3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ContinueArrow" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_41un3")
+offset = Vector2(16, -16)

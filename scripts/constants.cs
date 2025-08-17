@@ -33,5 +33,7 @@ public static class Constants
     public const int POSITION_ON_TILE_ON_RIGHT_EDGE = 1;
     public const float COOLDOWN_TIME_SHOT = 0.75f;
 
+    // public const float GRAVITY = 980f;
+    public const float GRAVITY = 2000f;
 }
 

@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=12 format=3 uid="uid://dfmtyat8s4i2l"]
-
+[gd_scene load_steps=13 format=3 uid="uid://dfmtyat8s4i2l"]
 
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_jylnq"]
 [ext_resource type="Texture2D" uid="uid://cvbeir4idcwkw" path="res://assets/updated_mc.png" id="2_7ebg6"]

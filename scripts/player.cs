@@ -8,7 +8,7 @@ using Timer = Godot.Timer;
 
 public partial class player : CharacterBody2D
 {
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	public float gravity = Constants.GRAVITY;
 	TileMap tileMap;
 	TileData tiledata;
 
@@ -20,10 +20,15 @@ public partial class player : CharacterBody2D
 	//add timer 
 	Timer cooldownTimer;
 	Boolean shotIsOnCooldown;
-	int actionLimit = 6;
-	int baseShotLimit = 3;
+	int actionCount = 6;
+	int baseAmmoCount = 3;
 	int specialShotLimit;
 
+	[Signal]
+	public delegate void NoAmmoLeftEventHandler();
+
+	[Signal]
+	public delegate void NoMovesLeftEventHandler();
 
 
 
@@ -52,6 +57,7 @@ public partial class player : CharacterBody2D
 		// GD.Print(Position);
 		// GD.Print(tileMap.LocalToMap(Position));
 	}
+
 
 
 	public void OnBodyEntered(Node2D node)
@@ -111,21 +117,27 @@ public partial class player : CharacterBody2D
 		{
 			// GD.Print("Throw-1 Pressed");
 			// GD.Print(Position);
-			if (!shotIsOnCooldown && actionLimit > 0 && baseShotLimit > 0)
+			if (!shotIsOnCooldown && actionCount > 0 && baseAmmoCount > 0)
 			{
 				shooter.ShootProjectile();
 				shotIsOnCooldown = true;
 				cooldownTimer.Start(Constants.COOLDOWN_TIME_SHOT);
-				actionLimit -= 1;
-				baseShotLimit -= 1;
-				GodotLogging.log(this, "Action Limit: " + actionLimit);
-				GodotLogging.log(this, "Base Shot Limit: " + baseShotLimit);
+				actionCount -= 1;
+				baseAmmoCount -= 1;
+				GodotLogging.log(this, "Action Limit: " + actionCount);
+				GodotLogging.log(this, "Base Shot Limit: " + baseAmmoCount);
+				//issue here.
+				if (baseAmmoCount <= 0)
+				{
+					EmitSignal(SignalName.NoAmmoLeft);
+				}
 			}
 
 		}
 		if (Input.IsActionJustPressed(Constants.CONTROLS_THROW2))
 		{
 			GD.Print("Throw-2 Pressed");
+			shooter.ShootCurvedProjectile();
 		}
 
 
@@ -140,6 +152,9 @@ public partial class player : CharacterBody2D
 			animatedSprite2D.Scale = new Vector2(1, 1);
 			// GD.Print("face right");
 		}
+
+
+
 
 	}
 }
