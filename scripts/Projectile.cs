@@ -8,7 +8,11 @@ public partial class Projectile : CharacterBody2D, GodotLogging
     Vector2 velocity;
     public Vector2 direction;
     float speed = Constants.SPEED;
-    
+    Player player;
+
+    // [Signal]
+    // public delegate void CollisionWithButtonEventHandler(Vector2I coordinates);
+
     // NEW: Track elapsed time for accurate physics
     private float _elapsedTime = 0f;
     private Vector2 _initialVelocity;
@@ -17,18 +21,19 @@ public partial class Projectile : CharacterBody2D, GodotLogging
     {
         _initialVelocity = direction * speed;
         velocity = _initialVelocity; // Initialize
+        player = GetParent().GetNode<Player>("Player");
     }
 
     public override void _PhysicsProcess(double delta)
     {
         _elapsedTime += (float)delta;
-        
+
         // 1. Calculate gravity effect using continuous time (matches trajectory math)
         float gravityEffect = 0.5f * gravity * Mathf.Pow(_elapsedTime, 2);
-        
+
         // 2. Apply to velocity while preserving MoveAndCollide
         velocity.Y = _initialVelocity.Y + (gravity * _elapsedTime);
-        
+
         // 3. Move with collision (unchanged from your original)
         Velocity = velocity;
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
@@ -40,8 +45,19 @@ public partial class Projectile : CharacterBody2D, GodotLogging
         // }
     }
     public void OnBodyEntered(Node2D node2D)
-	{
-		// GodotLogging.log(this, node2D.ToString());
-		//ADD SCRIPT FOR WHEN TILE BUTTON IS INTERACTED WITH FUCKING SHIT AHHHHH
-	}
+    {
+        GodotLogging.log(this, node2D.GetType().ToString());
+        if (node2D.GetType().ToString().Equals("Godot.TileMap"))
+        {
+            TileMap tileMap = (TileMap)node2D;
+            Vector2 position = Position;
+            Vector2I coords = tileMap.LocalToMap(tileMap.ToLocal(position));
+
+            GD.Print("Cell: " + coords); //Emit signal w/ the vector 2 in it
+            player.CollisionWithButtonEmitter(coords);
+        // EmitSignal(SignalName.CollisionWithButton, position);
+
+        }
+     
+    }
 }

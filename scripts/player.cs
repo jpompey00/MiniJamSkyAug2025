@@ -6,7 +6,7 @@ using System.Threading;
 using Timer = Godot.Timer;
 
 
-public partial class player : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 	public float gravity = Constants.GRAVITY;
 	TileMap tileMap;
@@ -30,6 +30,12 @@ public partial class player : CharacterBody2D
 	[Signal]
 	public delegate void NoMovesLeftEventHandler();
 
+	[Signal]
+	public delegate void CollisionWithButtonEventHandler(Vector2I coordiantes);
+	[Signal]
+	public delegate void CollisionWithPressurePlateEventHandler(Vector2I coordinates);
+	[Signal]
+	public delegate void ReleasedPressurePlateEventHandler(Vector2I coordinates);
 
 
 	public override void _Ready()
@@ -62,8 +68,43 @@ public partial class player : CharacterBody2D
 
 	public void OnBodyEntered(Node2D node)
 	{
-		GodotLogging.log(this, node.ToString());
+		// GodotLogging.log(this, node.ToString());
 		//for the pressure plate.
+
+		  GodotLogging.log(this, node.GetType().ToString());
+        if (node.GetType().ToString().Equals("Godot.TileMap"))
+        {
+            TileMap tileMap = (TileMap)node;
+            Vector2 position = Position;
+            Vector2I coords = tileMap.LocalToMap(tileMap.ToLocal(position));
+
+            GD.Print("Cell: " + coords); //Emit signal w/ the vector 2 in it
+            // node.CollisionWithButtonEmitter(coords);
+        EmitSignal(SignalName.CollisionWithPressurePlate, coords);
+
+        }
+
+	}
+
+	public void OnBodyExited(Node2D node)
+	{
+		if (node.GetType().ToString().Equals("Godot.TileMap"))
+		{
+			TileMap tileMap = (TileMap)node;
+			Vector2 position = Position;
+			Vector2I coords = tileMap.LocalToMap(tileMap.ToLocal(position));
+
+			GD.Print("Cell: " + coords); //Emit signal w/ the vector 2 in it
+			EmitSignal(SignalName.ReleasedPressurePlate, coords);
+		}
+		
+	}
+
+
+		public void CollisionWithButtonEmitter(Vector2I coordinates)
+	{
+		GD.Print("Emitter Called");
+		EmitSignal(SignalName.CollisionWithButton, coordinates);
 	}
 
 	public override void _PhysicsProcess(double delta)
