@@ -1,6 +1,5 @@
 [gd_scene load_steps=19 format=3 uid="uid://bhsf208pstqh"]
 
-<<<<<<< HEAD:Scenes/Stages/BaseStage.tscn
 [ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="1_doo24"]
 [ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="2_gttiq"]
 [ext_resource type="Texture2D" uid="uid://b8io0a5aoq2t8" path="res://assets/BlockingTile.png" id="3_0jwoa"]
@@ -13,19 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="10_gvh1t"]
 [ext_resource type="PackedScene" uid="uid://dqo8n04vuspgs" path="res://Scenes/scene_transition.tscn" id="11_70xm1"]
 [ext_resource type="PackedScene" uid="uid://yfihb1tmni0o" path="res://Scenes/arrow.tscn" id="12_3vo3b"]
-=======
-[ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="1_p2ple"]
-[ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="1_uxy70"]
-[ext_resource type="Texture2D" uid="uid://b8io0a5aoq2t8" path="res://assets/BlockingTile.png" id="2_ooxkj"]
-[ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="2_vhsy8"]
-[ext_resource type="Texture2D" uid="uid://csoltutx6iddx" path="res://assets/MovingTile.png" id="3_blhdo"]
-[ext_resource type="Texture2D" uid="uid://choj3v5s4plsp" path="res://assets/pressurePlate1.png" id="5_gy71p"]
-[ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="5_yx5xt"]
-[ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="6_ruljp"]
-[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="7_dvp5b"]
-[ext_resource type="PackedScene" path="res://Scenes/Button.tscn" id="8_5qcmu"]
-[ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="11_juj5o"]
->>>>>>> 10616e68c54e9a12dbca928f92e9483ff0ff6f21:Scenes/Stage.tscn
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_350ka"]
 texture = ExtResource("1_doo24")
