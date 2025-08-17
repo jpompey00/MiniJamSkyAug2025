@@ -1,48 +1,34 @@
 using Godot;
-
+using System.Collections.Generic;
 
 public partial class Trajectory : Line2D
 {
+    [Export] public int NumPoints = 50;
+    [Export] public float TimeStep = 0.05f;
+    
+    private Vector2 GetGravity()
+    {
+        return new Vector2(0, ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle());
+    }
 
-	public Vector2 directionToCursor;
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	Vector2 velocity;
-	int[] max_points = new int[10];
+    public void ShowTrajectory(Vector2 startGlobal, Vector2 initialVelocity)
+{
+    float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    Vector2[] pts = new Vector2[NumPoints];
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
+    for (int i = 0; i < NumPoints; i++)
+    {
+        float t = i * TimeStep;
+        // More precise calculation:
+        Vector2 displacement = initialVelocity * t + new Vector2(0, 0.5f * gravity * t * t);
+        pts[i] = ToLocal(startGlobal + displacement);
+    }
 
-	}
-
-
-	public void Update_trajectory(Vector2 direction, float speed)
-	{
-		Position = Vector2.Zero;
-
-		//AddPoint(Position += new Vector2(1, 0));
-		velocity = Vector2.Zero;
-		gravity = gravity / 200;
-		speed = speed/200;
-		ClearPoints();
-		foreach (int i in max_points)
-		{
-			AddPoint(Position);
-			velocity.X = direction.X * speed;
-			velocity.Y += gravity;
-			GD.Print(velocity);
-			Position += velocity;
-			//AddPoint(Position += new Vector2(5, 0));
-		}
-
-
-	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		Vector2 mousePostion = GetGlobalMousePosition();
-		Update_trajectory(GlobalPosition.DirectionTo(mousePostion), Constants.SPEED);
-		
-		
-	}
+    Points = pts;
 }
+    
+    }
+		// GD.Print(pts.Length);
+
+		
+	

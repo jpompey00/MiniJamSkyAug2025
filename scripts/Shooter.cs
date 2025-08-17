@@ -1,3 +1,4 @@
+
 using Godot;
 
 public partial class Shooter : Node2D, GodotLogging
@@ -6,15 +7,20 @@ public partial class Shooter : Node2D, GodotLogging
 	public Projectile projectile;
 	public PackedScene projetilePackedScene;
 	public Sprite2D arrow;
-
-
+	Trajectory trajectory;
+	Node2D player;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		projetilePackedScene = GD.Load<PackedScene>("res://Scenes/projectile.tscn");
 		// projectile = projetilePackedScene.Instantiate<Projectile>();
 		arrow = GetNode<Sprite2D>("Sprite2D");
-
+		trajectory = GetNode<Trajectory>("Line2D");
+		// Node test = GetChild(1);
+		player = GetNode<Node2D>("../Sprite2D");
+		
+		
+		
 		
 	}
 
@@ -25,6 +31,19 @@ public partial class Shooter : Node2D, GodotLogging
 		directionToCursor = GlobalPosition.DirectionTo(mousePostion);
 		float rotationAngle = GlobalPosition.AngleToPoint(mousePostion);
 		Rotation = rotationAngle;
+
+
+		// Show trajectory line
+
+		Vector2 start = arrow.GlobalPosition;
+        trajectory.GlobalPosition = start;
+		Vector2 dir = directionToCursor;
+		bool isFacingLeft = player.Scale.X < 0;
+		Vector2 velocity = dir * Constants.SPEED;
+		trajectory.ShowTrajectory(start,velocity);
+
+
+		
 
 		// GD.Print(Mathf.DegToRad(rotationAngle));
 		// GD.Print(directionToCursor);
