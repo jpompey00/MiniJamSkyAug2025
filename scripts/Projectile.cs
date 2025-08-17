@@ -4,7 +4,7 @@ using System;
 public partial class Projectile : CharacterBody2D, GodotLogging
 {
 
-    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    public float gravity = Constants.GRAVITY;
     Vector2 velocity;
     public Vector2 direction;
     float speed = Constants.SPEED;
@@ -41,7 +41,7 @@ public partial class Projectile : CharacterBody2D, GodotLogging
     }
     public void OnBodyEntered(Node2D node2D)
 	{
-		GodotLogging.log(this, node2D.ToString());
+		// GodotLogging.log(this, node2D.ToString());
 		//ADD SCRIPT FOR WHEN TILE BUTTON IS INTERACTED WITH FUCKING SHIT AHHHHH
 	}
 }

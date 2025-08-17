@@ -8,12 +8,12 @@ public partial class Trajectory : Line2D
     
     private Vector2 GetGravity()
     {
-        return new Vector2(0, ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle());
+        return new Vector2(0, Constants.GRAVITY);
     }
 
     public void ShowTrajectory(Vector2 startGlobal, Vector2 initialVelocity)
 {
-    float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    float gravity = Constants.GRAVITY;
     Vector2[] pts = new Vector2[NumPoints];
 
     for (int i = 0; i < NumPoints; i++)
