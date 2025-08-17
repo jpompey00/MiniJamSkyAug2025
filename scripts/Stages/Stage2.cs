@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-public partial class Stage2 : Node2D
+public partial class Stage2 : BaseStage
 {
 	Node2D enemyList;
 	Node2D continueArrow;
 	TileMap tileMap;
 	Boolean flag = true;
+	int actionCount = 6;
+	int ammoCount = 3;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -16,6 +18,7 @@ public partial class Stage2 : Node2D
 		continueArrow = GetNode<Node2D>("Continue Arrow");
 
 		tileMap = GetNode<TileMap>("TileMap");
+		base.setStageCount(actionCount, ammoCount, enemyList.GetChildCount());
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

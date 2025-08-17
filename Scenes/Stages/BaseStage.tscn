@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csoltutx6iddx" path="res://assets/MovingTile.png" id="4_a1jm1"]
 [ext_resource type="Texture2D" uid="uid://choj3v5s4plsp" path="res://assets/pressurePlate1.png" id="5_gl30x"]
 [ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="6_3hbgw"]
-[ext_resource type="PackedScene" uid="uid://b4v1n11t1ml6r" path="res://Scenes/ui.tscn" id="7_thsjg"]
+[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="7_thsjg"]
 [ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="8_562ok"]
 [ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="9_bjun5"]
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="10_gvh1t"]

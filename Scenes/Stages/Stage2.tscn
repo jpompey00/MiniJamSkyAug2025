@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://choj3v5s4plsp" path="res://assets/pressurePlate1.png" id="6_k433o"]
 [ext_resource type="Texture2D" uid="uid://dj1t716oa4ego" path="res://assets/continueArrow.png" id="7_i73el"]
 [ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="8_jpwp2"]
-[ext_resource type="PackedScene" uid="uid://b4v1n11t1ml6r" path="res://Scenes/ui.tscn" id="9_ese2y"]
+[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_ese2y"]
 [ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="10_qnubt"]
 [ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="11_euajy"]
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="12_2bcaq"]
@@ -229,6 +229,3 @@ position = Vector2(-160, 0)
 
 [node name="Scene Transition" parent="." instance=ExtResource("14_5wdxa")]
 position = Vector2(-160, 224)
-
-[connection signal="CollisionWithButton" from="Player" to="." method="buttonPressed"]
-[connection signal="NoAmmoLeft" from="Player" to="." method="signalTest"]
