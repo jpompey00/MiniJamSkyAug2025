@@ -3,42 +3,43 @@ using System;
 
 public partial class Projectile : CharacterBody2D, GodotLogging
 {
-	// public const float Speed = 300.0f;
-	// public const float JumpVelocity = -400.0f;
-	//on colission layer 2
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-	Vector2 velocity;
-	public Vector2 direction; //set on instantiation
-	float speed = Constants.SPEED;
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    Vector2 velocity;
+    public Vector2 direction;
+    float speed = Constants.SPEED;
+    
+    // NEW: Track elapsed time for accurate physics
+    private float _elapsedTime = 0f;
+    private Vector2 _initialVelocity;
 
+    public override void _Ready()
+    {
+        _initialVelocity = direction * speed;
+        velocity = _initialVelocity; // Initialize
+    }
 
-	public override void _Ready()
-	{
-		// velocity = direction * speed;
-		velocity = direction * speed;
-		// GD.Print(this, direction);
-	}
+    public override void _PhysicsProcess(double delta)
+    {
+        _elapsedTime += (float)delta;
+        
+        // 1. Calculate gravity effect using continuous time (matches trajectory math)
+        float gravityEffect = 0.5f * gravity * Mathf.Pow(_elapsedTime, 2);
+        
+        // 2. Apply to velocity while preserving MoveAndCollide
+        velocity.Y = _initialVelocity.Y + (gravity * _elapsedTime);
+        
+        // 3. Move with collision (unchanged from your original)
+        Velocity = velocity;
+        KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
 
-	public override void _PhysicsProcess(double delta)
-	{
-		velocity.Y += gravity * (float)delta;
-
-		Velocity = velocity;
-		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
-
-		// GD.Print(Velocity);
-
-		// if (!(collision == null))
-		// {
-
-		// velocity = velocity.Bounce(collision.GetNormal()) * .6f; 
-		// }
-	}
-
-
-	public void OnBodyEntered(Node2D node2D)
+        // Optional bounce (uncomment if needed)
+        // if (collision != null) 
+        // {
+        //     velocity = velocity.Bounce(collision.GetNormal()) * 0.6f;
+        // }
+    }
+    public void OnBodyEntered(Node2D node2D)
 	{
 		GodotLogging.log(this, node2D.ToString());
 		//ADD SCRIPT FOR WHEN TILE BUTTON IS INTERACTED WITH FUCKING SHIT AHHHHH
