@@ -1,5 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhsf208pstqh"]
+[gd_scene load_steps=19 format=3 uid="uid://bhsf208pstqh"]
 
+<<<<<<< HEAD:Scenes/Stages/BaseStage.tscn
+[ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="1_doo24"]
+[ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="2_gttiq"]
+[ext_resource type="Texture2D" uid="uid://b8io0a5aoq2t8" path="res://assets/BlockingTile.png" id="3_0jwoa"]
+[ext_resource type="Texture2D" uid="uid://csoltutx6iddx" path="res://assets/MovingTile.png" id="4_a1jm1"]
+[ext_resource type="Texture2D" uid="uid://choj3v5s4plsp" path="res://assets/pressurePlate1.png" id="5_gl30x"]
+[ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="6_3hbgw"]
+[ext_resource type="PackedScene" uid="uid://b4v1n11t1ml6r" path="res://Scenes/ui.tscn" id="7_thsjg"]
+[ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="8_562ok"]
+[ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="9_bjun5"]
+[ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="10_gvh1t"]
+[ext_resource type="PackedScene" uid="uid://dqo8n04vuspgs" path="res://Scenes/scene_transition.tscn" id="11_70xm1"]
+[ext_resource type="PackedScene" uid="uid://yfihb1tmni0o" path="res://Scenes/arrow.tscn" id="12_3vo3b"]
+=======
 [ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="1_p2ple"]
 [ext_resource type="Texture2D" uid="uid://bk3umgxv6lxed" path="res://assets/tile_1.png" id="1_uxy70"]
 [ext_resource type="Texture2D" uid="uid://b8io0a5aoq2t8" path="res://assets/BlockingTile.png" id="2_ooxkj"]
@@ -11,9 +25,10 @@
 [ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="7_dvp5b"]
 [ext_resource type="PackedScene" path="res://Scenes/Button.tscn" id="8_5qcmu"]
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="11_juj5o"]
+>>>>>>> 10616e68c54e9a12dbca928f92e9483ff0ff6f21:Scenes/Stage.tscn
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_350ka"]
-texture = ExtResource("1_p2ple")
+texture = ExtResource("1_doo24")
 texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 2
 0:0/0 = 0
@@ -44,7 +59,7 @@ texture_region_size = Vector2i(32, 32)
 1:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-16, 11, 16, 11, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_di1i3"]
-texture = ExtResource("1_uxy70")
+texture = ExtResource("2_gttiq")
 texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 4
 0:0/0 = 0
@@ -75,7 +90,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/3/custom_data_0 = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bk4dg"]
-texture = ExtResource("2_ooxkj")
+texture = ExtResource("3_0jwoa")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -87,7 +102,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/physics_layer_2/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7ucf"]
-texture = ExtResource("3_blhdo")
+texture = ExtResource("4_a1jm1")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -99,7 +114,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/physics_layer_2/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3dwf"]
-texture = ExtResource("5_gy71p")
+texture = ExtResource("5_gl30x")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -142,13 +157,13 @@ rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(65537, 1, 0, 65538, 1, 65536, 65539, 1, 65536, 65540, 1, 196608, -131067, 3, 0, -65531, 3, 0, 5, 3, 0, -65540, 2, 0, -4, 2, 0, 65532, 2, 0, -65539, 0, 65536, 1, 4, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_vhsy8")]
+[node name="Player" parent="." instance=ExtResource("6_3hbgw")]
 position = Vector2(64, 32)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 
-[node name="UI" parent="Camera2D" instance=ExtResource("7_dvp5b")]
+[node name="UI" parent="Camera2D" instance=ExtResource("7_thsjg")]
 offset_left = 161.0
 offset_top = -212.0
 offset_right = 201.0
@@ -160,18 +175,20 @@ size_flags_vertical = 0
 z_index = -1
 position = Vector2(7.62939e-06, -2.52724e-05)
 scale = Vector2(0.266667, 0.414815)
-texture = ExtResource("5_yx5xt")
+texture = ExtResource("8_562ok")
 
 [node name="Sprite2D" type="Sprite2D" parent="BrickBackground"]
 z_index = -1
 position = Vector2(-9.15527e-05, 6.09245e-05)
 scale = Vector2(1.5, 1)
-texture = ExtResource("6_ruljp")
+texture = ExtResource("9_bjun5")
 
-[node name="Node2D" parent="." instance=ExtResource("8_5qcmu")]
-visible = false
-position = Vector2(-92, -46)
-rotation = 1.5708
+[node name="EnemyList" type="Node2D" parent="."]
 
-[node name="Enemy1" parent="." instance=ExtResource("11_juj5o")]
+[node name="Enemy1" parent="EnemyList" instance=ExtResource("10_gvh1t")]
 position = Vector2(-50, 49)
+
+[node name="Scene Transition" parent="." instance=ExtResource("11_70xm1")]
+
+[node name="Node2D" parent="." instance=ExtResource("12_3vo3b")]
+position = Vector2(-54, -30)

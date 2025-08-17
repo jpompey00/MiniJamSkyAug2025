@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dj1t716oa4ego" path="res://assets/continueArrow.png" id="1_41un3"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Continue Arrow" type="Node2D"]
 
 [node name="ContinueArrow" type="Sprite2D" parent="."]
 texture_filter = 1

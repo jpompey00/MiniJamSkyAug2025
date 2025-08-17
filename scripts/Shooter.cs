@@ -11,6 +11,9 @@ public partial class Shooter : Node2D, GodotLogging
 	Trajectory trajectory;
 	Node2D player;
 	// Called when the node enters the scene tree for the first time.
+
+
+
 	public override void _Ready()
 	{
 		projetilePackedScene = GD.Load<PackedScene>("res://Scenes/projectile.tscn");
@@ -75,4 +78,7 @@ public partial class Shooter : Node2D, GodotLogging
 		GetTree().CurrentScene.AddChild(projectile);
 		projectile.Position = new Vector2(arrow.GlobalPosition.X, arrow.GlobalPosition.Y);
 	}
+
+
+
 }
