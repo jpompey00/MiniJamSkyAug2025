@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://8yybgg47anuo" path="res://assets/arrow.png" id="3_lgb46"]
 [ext_resource type="Script" path="res://scripts/Shooter.cs" id="3_xe65c"]
 [ext_resource type="Script" path="res://scripts/Trajectory.cs" id="5_la1nm"]
-[ext_resource type="Texture2D" uid="uid://cph3ef3e3a1po" path="res://assets/dotted_line.png" id="5_p0fjv"]
+[ext_resource type="Texture2D" uid="uid://dc4tipyxe6umx" path="res://assets/dotted_line.png" id="5_p0fjv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qn4vs"]
 atlas = ExtResource("2_7ebg6")
@@ -30,10 +30,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_67lqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn4vs")
 }],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+"loop": false,
+"name": &"throw",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3eho"]
@@ -45,21 +48,12 @@ size = Vector2(28, 4)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cyxl4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(16, -15)
-
-[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 16.0
-offset_bottom = 15.0
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(16, -16)
 sprite_frames = SubResource("SpriteFrames_ni4dm")
+animation = &"throw"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, -16)
@@ -70,13 +64,13 @@ position = Vector2(16, -16)
 script = ExtResource("3_xe65c")
 
 [node name="Sprite2D" type="Sprite2D" parent="Shooter"]
+visible = false
 texture_filter = 1
 position = Vector2(18, 0)
 texture = ExtResource("3_lgb46")
 
 [node name="Line2D" type="Line2D" parent="Shooter"]
 width = 5.0
-default_color = Color(1, 0, 0, 1)
 texture = ExtResource("5_p0fjv")
 texture_mode = 1
 script = ExtResource("5_la1nm")

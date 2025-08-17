@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4v1n11t1ml6r"]
+[gd_scene load_steps=6 format=3 uid="uid://b4v1n11t1ml6r"]
 
 [ext_resource type="Texture2D" uid="uid://dwc5i2xbmjhy6" path="res://assets/boomerangs.png" id="1_tqylg"]
+[ext_resource type="FontFile" uid="uid://rjcf6lk4byar" path="res://assets/fonts/Pixelout Personal Use Only.ttf" id="2_vusj2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xoovd"]
 atlas = ExtResource("1_tqylg")
@@ -9,6 +10,13 @@ region = Rect2(96, 1, 15, 30)
 [sub_resource type="AtlasTexture" id="AtlasTexture_y06cu"]
 atlas = ExtResource("1_tqylg")
 region = Rect2(64, 1, 16, 30)
+
+[sub_resource type="Theme" id="Theme_op3tv"]
+RichTextLabel/colors/default_color = Color(1, 1, 1, 0.968627)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/normal_font_size = 21
+RichTextLabel/fonts/normal_font = ExtResource("2_vusj2")
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -44,6 +52,7 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_xoovd")
 
 [node name="Special Ammo Container" type="HBoxContainer" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_top = 67.0
@@ -72,10 +81,12 @@ offset_right = 60.0
 offset_bottom = 40.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Moves Counter"]
+texture_filter = 1
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 97.0
+offset_bottom = 42.0
+theme = SubResource("Theme_op3tv")
 text = "Moves 1
 "
 fit_content = true

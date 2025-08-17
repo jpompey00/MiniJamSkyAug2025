@@ -10,6 +10,8 @@ public partial class Projectile : CharacterBody2D, GodotLogging
     float speed = Constants.SPEED;
     Player player;
 
+    AnimationPlayer animationPlayer;
+
     // [Signal]
     // public delegate void CollisionWithButtonEventHandler(Vector2I coordinates);
 
@@ -22,6 +24,8 @@ public partial class Projectile : CharacterBody2D, GodotLogging
         _initialVelocity = direction * speed;
         velocity = _initialVelocity; // Initialize
         player = GetParent().GetNode<Player>("Player");
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationPlayer.Play("BoomerangFly");
     }
 
     public override void _PhysicsProcess(double delta)

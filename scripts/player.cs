@@ -160,6 +160,7 @@ public partial class Player : CharacterBody2D
 			// GD.Print(Position);
 			if (!shotIsOnCooldown && actionCount > 0 && baseAmmoCount > 0)
 			{
+				animatedSprite2D.Play("throw");
 				shooter.ShootProjectile();
 				shotIsOnCooldown = true;
 				cooldownTimer.Start(Constants.COOLDOWN_TIME_SHOT);
@@ -172,6 +173,7 @@ public partial class Player : CharacterBody2D
 				{
 					EmitSignal(SignalName.NoAmmoLeft);
 				}
+				// animatedSprite2D.Stop();
 			}
 
 		}

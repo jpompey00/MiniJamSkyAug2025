@@ -22,7 +22,7 @@ public partial class Shooter : Node2D, GodotLogging
 		arrow = GetNode<Sprite2D>("Sprite2D");
 		trajectory = GetNode<Trajectory>("Line2D");
 		// Node test = GetChild(1);
-		player = GetNode<Node2D>("../Sprite2D");
+		player = GetNode<Node2D>("../AnimatedSprite2D");
 
 
 
