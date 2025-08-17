@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://8yybgg47anuo" path="res://assets/arrow.png" id="3_lgb46"]
 [ext_resource type="Script" path="res://scripts/Shooter.cs" id="3_xe65c"]
 [ext_resource type="Script" path="res://scripts/Trajectory.cs" id="5_la1nm"]
-[ext_resource type="Texture2D" uid="uid://dc4tipyxe6umx" path="res://assets/dotted_line.png" id="5_p0fjv"]
+[ext_resource type="Texture2D" uid="uid://cph3ef3e3a1po" path="res://assets/dotted_line.png" id="5_p0fjv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qn4vs"]
 atlas = ExtResource("2_7ebg6")
