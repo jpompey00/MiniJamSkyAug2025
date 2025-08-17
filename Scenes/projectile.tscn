@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgk7j83475qso"]
+[gd_scene load_steps=5 format=3 uid="uid://dgk7j83475qso"]
 
-[ext_resource type="Texture2D" uid="uid://osq2088s5trq" path="res://assets/projectileplaceholder.png" id="1_nw12g"]
 [ext_resource type="Script" path="res://scripts/Projectile.cs" id="1_vikho"]
+[ext_resource type="Texture2D" uid="uid://dwc5i2xbmjhy6" path="res://assets/boomerangs.png" id="2_bs1we"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlgcb"]
+atlas = ExtResource("2_bs1we")
+region = Rect2(162, 0, 9, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e7vut"]
 size = Vector2(10.8634, 11)
@@ -13,9 +17,22 @@ script = ExtResource("1_vikho")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_nw12g")
+position = Vector2(2.38419e-07, -0.999999)
+scale = Vector2(0.549569, 0.549569)
+texture = SubResource("AtlasTexture_tlgcb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.520421, -0.5)
 scale = Vector2(1.01634, 1)
 shape = SubResource("RectangleShape2D_e7vut")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.520421, -0.5)
+scale = Vector2(1.01634, 1)
+shape = SubResource("RectangleShape2D_e7vut")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
