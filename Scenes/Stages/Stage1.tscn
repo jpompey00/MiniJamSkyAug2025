@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://br3dh8oxolu1f"]
+[gd_scene load_steps=23 format=3 uid="uid://br3dh8oxolu1f"]
 
 [ext_resource type="Script" path="res://scripts/Stages/Stage1.cs" id="1_27xl4"]
 [ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="2_llg4o"]
@@ -8,12 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://choj3v5s4plsp" path="res://assets/pressurePlate1.png" id="6_2gr8j"]
 [ext_resource type="Texture2D" uid="uid://dj1t716oa4ego" path="res://assets/continueArrow.png" id="7_b25ud"]
 [ext_resource type="PackedScene" uid="uid://dfmtyat8s4i2l" path="res://Scenes/player.tscn" id="8_8hc50"]
-[ext_resource type="PackedScene" path="res://Scenes/ui.tscn" id="9_qokg1"]
+[ext_resource type="PackedScene" uid="uid://b4v1n11t1ml6r" path="res://Scenes/ui.tscn" id="9_qokg1"]
 [ext_resource type="Texture2D" uid="uid://b5iry33weievp" path="res://assets/background_transparency_added.png" id="10_ulhlw"]
 [ext_resource type="Texture2D" uid="uid://dwmp6vsbq8hrp" path="res://assets/sky.png" id="11_h2vlq"]
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="12_vhd83"]
 [ext_resource type="PackedScene" uid="uid://yfihb1tmni0o" path="res://Scenes/arrow.tscn" id="13_jlta3"]
 [ext_resource type="PackedScene" uid="uid://dqo8n04vuspgs" path="res://Scenes/scene_transition.tscn" id="14_86dkw"]
+[ext_resource type="PackedScene" uid="uid://duwjrrn4nvfgd" path="res://Scenes/SceneTransitionAnimation.tscn" id="15_vcghh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_350ka"]
 texture = ExtResource("2_llg4o")
@@ -165,9 +166,9 @@ position = Vector2(64, 32)
 zoom = Vector2(1.5, 1.5)
 
 [node name="UI" parent="Camera2D" instance=ExtResource("9_qokg1")]
-offset_left = 161.0
+offset_left = 163.0
 offset_top = -212.0
-offset_right = 201.0
+offset_right = 203.0
 offset_bottom = -172.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -201,10 +202,11 @@ position = Vector2(160, 0)
 [node name="Scene Transition" parent="." instance=ExtResource("14_86dkw")]
 position = Vector2(160, 224)
 
-[node name="UI" parent="." instance=ExtResource("9_qokg1")]
-offset_left = 161.0
-offset_top = -212.0
-offset_right = 201.0
-offset_bottom = -172.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("15_vcghh")]
+visible = false
+position = Vector2(-476, -357)
+
+[connection signal="AmmoDecreased" from="Player" to="Camera2D/UI" method="decrementAmmo"]
+[connection signal="MovementDecreased" from="Player" to="Camera2D/UI" method="decrementMove"]
+[connection signal="NoAmmoLeft" from="Player" to="." method="loss"]
+[connection signal="NoAmmoLeft" from="Player" to="." method="loseScenario"]

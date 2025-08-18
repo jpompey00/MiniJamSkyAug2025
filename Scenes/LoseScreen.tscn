@@ -1,0 +1,166 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8ltv4t4dkv6c"]
+
+[ext_resource type="Texture2D" uid="uid://cpt5lhuthyxfm" path="res://assets/Drawings/tower.png" id="1_i6are"]
+[ext_resource type="Script" path="res://scripts/LoseScreen.cs" id="1_ydo6x"]
+[ext_resource type="Texture2D" uid="uid://7t0rpnpp4i0e" path="res://assets/Text/Lose Message.png" id="2_hdnk5"]
+[ext_resource type="Texture2D" uid="uid://ma2sw1rukoei" path="res://assets/Text/RestartMessage.png" id="3_8m0fw"]
+[ext_resource type="PackedScene" uid="uid://duwjrrn4nvfgd" path="res://Scenes/SceneTransitionAnimation.tscn" id="5_tkf6f"]
+
+[sub_resource type="Animation" id="Animation_gwh6w"]
+resource_name = "Lose Screen Tower"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(992, 224), Vector2(992, 218), Vector2(992, 224)]
+}
+
+[sub_resource type="Animation" id="Animation_g6f76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(992, 224)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vjaas"]
+_data = {
+"Lose Screen Tower": SubResource("Animation_gwh6w"),
+"RESET": SubResource("Animation_g6f76")
+}
+
+[sub_resource type="Animation" id="Animation_kk0un"]
+resource_name = "Lose Message Animation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoseMessage:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o2sti"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoseMessage:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cmpet"]
+_data = {
+"Lose Message Animation": SubResource("Animation_kk0un"),
+"RESET": SubResource("Animation_o2sti")
+}
+
+[sub_resource type="Animation" id="Animation_2hpca"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sgg8y"]
+resource_name = "Restart Message Animation"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.996078)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66k4x"]
+_data = {
+"RESET": SubResource("Animation_2hpca"),
+"Restart Message Animation": SubResource("Animation_sgg8y")
+}
+
+[node name="Lose Screen" type="Node2D"]
+script = ExtResource("1_ydo6x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -64.0
+offset_top = -192.0
+offset_right = 1248.0
+offset_bottom = 1120.0
+color = Color(0.131818, 0.195521, 0.245793, 0.827451)
+
+[node name="Tower" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(992, 224)
+scale = Vector2(0.316964, 0.316964)
+texture = ExtResource("1_i6are")
+
+[node name="TowerAnimationPlayer" type="AnimationPlayer" parent="Tower"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vjaas")
+}
+
+[node name="LoseMessage" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(544, 192)
+texture = ExtResource("2_hdnk5")
+
+[node name="LoseMessageAnimationPlayer" type="AnimationPlayer" parent="LoseMessage"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_cmpet")
+}
+
+[node name="RestartMessage" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(576, 512)
+scale = Vector2(0.803318, 0.803318)
+texture = ExtResource("3_8m0fw")
+
+[node name="RestartMessageAnimationPlayer" type="AnimationPlayer" parent="RestartMessage"]
+libraries = {
+"": SubResource("AnimationLibrary_66k4x")
+}
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("5_tkf6f")]
+visible = false

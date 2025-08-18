@@ -9,6 +9,11 @@ public partial class Projectile : CharacterBody2D, GodotLogging
     public Vector2 direction;
     float speed = Constants.SPEED;
     Player player;
+    BaseStage stage;
+    Timer timer;
+    AnimationPlayer animationPlayer;
+    [Signal]
+    public delegate void ProjecileExpendedEventHandler();
 
     // [Signal]
     // public delegate void CollisionWithButtonEventHandler(Vector2I coordinates);
@@ -19,9 +24,23 @@ public partial class Projectile : CharacterBody2D, GodotLogging
 
     public override void _Ready()
     {
+        timer = new Timer();
+
         _initialVelocity = direction * speed;
         velocity = _initialVelocity; // Initialize
         player = GetParent().GetNode<Player>("Player");
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationPlayer.Play("BoomerangFly");
+
+        stage = (BaseStage)GetTree().CurrentScene;
+        // GD.Print("stage");
+        ProjecileExpended += stage.projectileExpended;
+
+        //if projectile gets stuck.
+        timer.Timeout += () => {EmitSignal(SignalName.ProjecileExpended); QueueFree(); };
+        this.AddChild(timer);
+        timer.Start(7f);
+        
     }
 
     public override void _PhysicsProcess(double delta)
@@ -39,10 +58,18 @@ public partial class Projectile : CharacterBody2D, GodotLogging
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
 
         // Optional bounce (uncomment if needed)
-        // if (collision != null) 
-        // {
-        //     velocity = velocity.Bounce(collision.GetNormal()) * 0.6f;
-        // }
+        if (collision != null)
+        {
+            velocity = velocity.Bounce(collision.GetNormal()) * 0.6f;
+        }
+
+        if (Position.Y > 1000f)
+        {
+            EmitSignal(SignalName.ProjecileExpended);
+            QueueFree();
+        }
+
+
     }
     public void OnBodyEntered(Node2D node2D)
     {

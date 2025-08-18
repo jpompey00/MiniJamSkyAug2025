@@ -9,28 +9,27 @@ public partial class Stage3 : BaseStage
 	Boolean flag = true;
 
 	Boolean topTileActive = true;
-	
+	Boolean hasLostFlag = false;
 	int actionCount = 6;
-	int ammoCount = 3;
+	int ammoCount = 4;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
 		enemyList = GetNode<Node2D>("EnemyList");
-		GD.Print(enemyList.GetChildCount());
+		// GD.Print(enemyList.GetChildCount());
 
 		continueArrow = GetNode<Node2D>("Continue Arrow");
 
 		tileMap = GetNode<TileMap>("TileMap");
 		base.setStageCount(actionCount, ammoCount, enemyList.GetChildCount());
+		base.setNextLevel(Constants.VICTORY_SCREEN);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		// if (enemyList != null && enemyList.GetChildCount() > 0)
-		// {
-		// 	GD.Print(enemyList.GetChildCount());
-		// }
+
 
 		if (enemyList != null && enemyList.GetChildCount() <= 0)
 		{
@@ -41,24 +40,19 @@ public partial class Stage3 : BaseStage
 				flag = false;
 			}
 		}
+		if (getCurrentAmmo() == 0 && !hasLostFlag && enemyList.GetChildCount() > 0 && !flag)
+		{
+			hasLostFlag = true;
+			loseScenario();
+		}
 
 	}
 
-	public void signalTest()
-	{
-		GD.Print("Signal Called");
-		loseScenario();
-	}
-
-
-	public void loseScenario()
-	{
-		GD.Print("Player loses");
-	}
 
 
 	public void winScenario()
 	{
+		base.winFunction();
 		GD.Print("Player wins");
 		continueArrow.Visible = true;
 		tileMap.SetCell(0, new Vector2I(1, 1), 1, new Vector2I(0, 0), 1);

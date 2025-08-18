@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dqbnk8blkj6p8"]
+
+[ext_resource type="Texture2D" uid="uid://dwc5i2xbmjhy6" path="res://assets/boomerangs.png" id="1_x5e0a"]
+
+[resource]
+atlas = ExtResource("1_x5e0a")
+region = Rect2(32, 1, 15, 30)
