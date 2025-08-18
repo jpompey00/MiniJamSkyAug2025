@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bjtnedyfly2mv"]
+[gd_scene load_steps=23 format=3 uid="uid://bjtnedyfly2mv"]
 
 [ext_resource type="Script" path="res://scripts/Stages/Stage2.cs" id="1_20rga"]
 [ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="2_fhd2r"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="12_2bcaq"]
 [ext_resource type="PackedScene" uid="uid://yfihb1tmni0o" path="res://Scenes/arrow.tscn" id="13_pndyv"]
 [ext_resource type="PackedScene" uid="uid://dqo8n04vuspgs" path="res://Scenes/scene_transition.tscn" id="14_5wdxa"]
+[ext_resource type="PackedScene" uid="uid://duwjrrn4nvfgd" path="res://Scenes/SceneTransitionAnimation.tscn" id="15_p7nua"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_350ka"]
 texture = ExtResource("2_fhd2r")
@@ -229,3 +230,12 @@ position = Vector2(-160, 0)
 
 [node name="Scene Transition" parent="." instance=ExtResource("14_5wdxa")]
 position = Vector2(-160, 224)
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("15_p7nua")]
+visible = false
+position = Vector2(-538, -369)
+
+[connection signal="AmmoDecreased" from="Player" to="Camera2D/UI" method="decrementAmmo"]
+[connection signal="CollisionWithButton" from="Player" to="." method="buttonPressed"]
+[connection signal="MovementDecreased" from="Player" to="Camera2D/UI" method="decrementMove"]
+[connection signal="NoAmmoLeft" from="Player" to="." method="loseScenario"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8ltv4t4dkv6c"]
+[gd_scene load_steps=15 format=3 uid="uid://c8ltv4t4dkv6c"]
 
 [ext_resource type="Texture2D" uid="uid://cpt5lhuthyxfm" path="res://assets/Drawings/tower.png" id="1_i6are"]
+[ext_resource type="Script" path="res://scripts/LoseScreen.cs" id="1_ydo6x"]
 [ext_resource type="Texture2D" uid="uid://7t0rpnpp4i0e" path="res://assets/Text/Lose Message.png" id="2_hdnk5"]
 [ext_resource type="Texture2D" uid="uid://ma2sw1rukoei" path="res://assets/Text/RestartMessage.png" id="3_8m0fw"]
+[ext_resource type="PackedScene" uid="uid://duwjrrn4nvfgd" path="res://Scenes/SceneTransitionAnimation.tscn" id="5_tkf6f"]
 
 [sub_resource type="Animation" id="Animation_gwh6w"]
 resource_name = "Lose Screen Tower"
@@ -18,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(992, 224), Vector2(992, 215), Vector2(992, 224)]
+"values": [Vector2(992, 224), Vector2(992, 218), Vector2(992, 224)]
 }
 
 [sub_resource type="Animation" id="Animation_g6f76"]
@@ -33,7 +35,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(992, 160)]
+"values": [Vector2(992, 224)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vjaas"]
@@ -117,6 +119,7 @@ _data = {
 }
 
 [node name="Lose Screen" type="Node2D"]
+script = ExtResource("1_ydo6x")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -64.0
@@ -127,7 +130,7 @@ color = Color(0.131818, 0.195521, 0.245793, 0.827451)
 
 [node name="Tower" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(992, 160)
+position = Vector2(992, 224)
 scale = Vector2(0.316964, 0.316964)
 texture = ExtResource("1_i6are")
 
@@ -158,3 +161,6 @@ texture = ExtResource("3_8m0fw")
 libraries = {
 "": SubResource("AnimationLibrary_66k4x")
 }
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("5_tkf6f")]
+visible = false

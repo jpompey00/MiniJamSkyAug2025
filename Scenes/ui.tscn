@@ -1,11 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4v1n11t1ml6r"]
 
 [ext_resource type="Texture2D" uid="uid://dwc5i2xbmjhy6" path="res://assets/boomerangs.png" id="1_tqylg"]
+[ext_resource type="Script" path="res://scripts/UI.cs" id="1_yx08m"]
 [ext_resource type="FontFile" uid="uid://rjcf6lk4byar" path="res://assets/fonts/Pixelout Personal Use Only.ttf" id="2_vusj2"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xoovd"]
-atlas = ExtResource("1_tqylg")
-region = Rect2(96, 1, 15, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y06cu"]
 atlas = ExtResource("1_tqylg")
@@ -23,6 +20,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(0.998819, 1.06083)
+script = ExtResource("1_yx08m")
 
 [node name="Base Ammo Container" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(10, 10)
@@ -30,26 +29,6 @@ layout_mode = 0
 offset_top = 25.0
 offset_right = 72.0
 offset_bottom = 65.0
-
-[node name="TextureRect" type="TextureRect" parent="Base Ammo Container"]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("AtlasTexture_xoovd")
-
-[node name="TextureRect2" type="TextureRect" parent="Base Ammo Container"]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("AtlasTexture_xoovd")
-
-[node name="TextureRect3" type="TextureRect" parent="Base Ammo Container"]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("AtlasTexture_xoovd")
-
-[node name="TextureRect4" type="TextureRect" parent="Base Ammo Container"]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("AtlasTexture_xoovd")
 
 [node name="Special Ammo Container" type="HBoxContainer" parent="."]
 visible = false
@@ -84,9 +63,9 @@ offset_bottom = 40.0
 texture_filter = 1
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 0
-offset_right = 97.0
-offset_bottom = 42.0
+offset_right = 100.0
+offset_bottom = 44.0
 theme = SubResource("Theme_op3tv")
-text = "Moves 1
+text = "Moves 3
 "
 fit_content = true

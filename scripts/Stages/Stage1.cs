@@ -7,19 +7,26 @@ public partial class Stage1 : BaseStage
 	Node2D continueArrow;
 	TileMap tileMap;
 	Boolean flag = true;
-
+Boolean hasLostFlag = false;
 	int actionCount = 6;
-	int ammoCount = 3;
+	int ammoCount = 4;
 	// Called when the node enters the scene tree for the first time.
+	// AudioStreamPlayer2D audioStreamPlayer2D;
 	public override void _Ready()
 	{
+		// audioStreamPlayer2D = GetTree().Root.GetNode<AudioStreamPlayer2D>("MusicPlayer");
+		// audioStreamPlayer2D.Stream = GD.Load<AudioStream>(Constants.);
+		// audioStreamPlayer2D.Play();
+
+		base._Ready();
 		enemyList = GetNode<Node2D>("EnemyList");
-		GD.Print(enemyList.GetChildCount());
+		// GD.Print(enemyList.GetChildCount());
 
 		continueArrow = GetNode<Node2D>("Continue Arrow");
 
 		tileMap = GetNode<TileMap>("TileMap");
-		base.setStageCount(actionCount,ammoCount,enemyList.GetChildCount());
+		base.setStageCount(actionCount, ammoCount, enemyList.GetChildCount());
+		base.setNextLevel(Constants.LEVEL_2_PATH);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +39,7 @@ public partial class Stage1 : BaseStage
 
 		if (enemyList != null && enemyList.GetChildCount() <= 0)
 		{
-			
+
 			if (flag)
 			{
 				winScenario();
@@ -40,12 +47,18 @@ public partial class Stage1 : BaseStage
 			}
 		}
 
+		if (getCurrentAmmo() == 0 && !hasLostFlag && enemyList.GetChildCount() > 0 && !flag)
+		{
+			hasLostFlag = true;
+			loseScenario();
+		}
+
 	}
 
-	public void signalTest()
+	public void loss()
 	{
-		GD.Print("Signal Called");
-		loseScenario();
+		// GD.Print("Signal Called");
+		// base.loseScenario();
 	}
 
 
@@ -54,8 +67,8 @@ public partial class Stage1 : BaseStage
 
 	public void winScenario()
 	{
-		base.winScenario();
-		GD.Print("Player wins");
+		base.winFunction();
+		// GD.Print("Player wins");
 		continueArrow.Visible = true;
 		tileMap.SetCell(0, new Vector2I(4, 1), 1, new Vector2I(0, 0), 1);
 		//add some animation

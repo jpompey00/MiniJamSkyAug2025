@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="MiniJamSkyAug2025"
-run/main_scene="res://Scenes/Stages/BaseStage.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MusicPlayer="*res://assets/Music/audio_stream_player_2d.tscn"
 
 [dotnet]
 

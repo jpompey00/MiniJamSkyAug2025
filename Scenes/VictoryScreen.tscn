@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://bg11lyrmtrb13"]
+
+[ext_resource type="Texture2D" uid="uid://dafprus0iwks4" path="res://assets/Drawings/win_1.png" id="1_h0l2n"]
+[ext_resource type="Script" path="res://scripts/VictoryScreen.cs" id="1_uswl5"]
+[ext_resource type="Texture2D" uid="uid://yud63r1ylwrl" path="res://assets/Drawings/win4_v2.png" id="2_aui7t"]
+[ext_resource type="Texture2D" uid="uid://8vsar7krgpwa" path="res://assets/Drawings/win3.png" id="3_stuq6"]
+[ext_resource type="Texture2D" uid="uid://cgagsnflbac6m" path="res://assets/Drawings/win_2.png" id="4_cxh7m"]
+[ext_resource type="Texture2D" uid="uid://ddx3vxvk25cgg" path="res://assets/Drawings/win_5.png" id="5_fdxkc"]
+[ext_resource type="Texture2D" uid="uid://lqtdlav4adrf" path="res://assets/Text/Victory Message.png" id="6_glqu3"]
+[ext_resource type="Texture2D" uid="uid://buumojgw7ke30" path="res://assets/Text/thanks.png" id="7_seecb"]
+
+[sub_resource type="Animation" id="Animation_clj38"]
+resource_name = "Victory"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VictoryMessage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(326, -304), Vector2(326, 280)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thanks:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(301, 968), Vector2(301, 622)]
+}
+
+[sub_resource type="Animation" id="Animation_dx886"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VictoryMessage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(326, -304)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thanks:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(301, 622)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8lbu"]
+_data = {
+"RESET": SubResource("Animation_dx886"),
+"Victory": SubResource("Animation_clj38")
+}
+
+[node name="Victory Screen" type="Node2D"]
+script = ExtResource("1_uswl5")
+
+[node name="Win1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(909, 376)
+scale = Vector2(0.786263, 0.786263)
+texture = ExtResource("1_h0l2n")
+
+[node name="Win4V2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(178, 220)
+scale = Vector2(0.1693, 0.1693)
+texture = ExtResource("2_aui7t")
+
+[node name="Win3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(970, 280)
+scale = Vector2(0.658223, 0.658223)
+texture = ExtResource("3_stuq6")
+
+[node name="Win2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1078, 54)
+scale = Vector2(0.463509, 0.463509)
+texture = ExtResource("4_cxh7m")
+
+[node name="Win5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(75, 102)
+scale = Vector2(0.235714, 0.235714)
+texture = ExtResource("5_fdxkc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -4
+offset_left = -66.0
+offset_top = -85.0
+offset_right = 1207.0
+offset_bottom = 1188.0
+color = Color(0.20187, 0.247716, 0.287283, 1)
+
+[node name="VictoryMessage" type="Sprite2D" parent="."]
+position = Vector2(326, -304)
+texture = ExtResource("6_glqu3")
+
+[node name="Thanks" type="Sprite2D" parent="."]
+position = Vector2(301, 622)
+texture = ExtResource("7_seecb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c8lbu")
+}

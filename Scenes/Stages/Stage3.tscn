@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3thw108pmyhq"]
+[gd_scene load_steps=21 format=3 uid="uid://d3thw108pmyhq"]
 
 [ext_resource type="Script" path="res://scripts/Stages/Stage3.cs" id="1_ivt34"]
 [ext_resource type="Texture2D" uid="uid://clnbaep2v6igy" path="res://assets/buttonfixedFR.png" id="1_yl2ax"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bxklvll1tsjgd" path="res://Scenes/Enemy1.tscn" id="10_pa1oh"]
 [ext_resource type="PackedScene" uid="uid://yfihb1tmni0o" path="res://Scenes/arrow.tscn" id="12_b4rpr"]
 [ext_resource type="PackedScene" uid="uid://dqo8n04vuspgs" path="res://Scenes/scene_transition.tscn" id="13_sikmk"]
+[ext_resource type="PackedScene" uid="uid://duwjrrn4nvfgd" path="res://Scenes/SceneTransitionAnimation.tscn" id="14_yxmq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_350ka"]
 texture = ExtResource("1_yl2ax")
@@ -146,7 +147,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(4, 2, 0, -65532, 2, 0, 131069, 1, 0, 131070, 1, 65536, 131071, 1, 65536, 65536, 1, 65536, 65537, 1, 196608, -131068, 3, 0, 65533, 4, 0)
 
 [node name="Player" parent="." instance=ExtResource("6_68ykx")]
-position = Vector2(-32, 32)
+position = Vector2(-32, -192)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -183,7 +184,18 @@ position = Vector2(192, 96)
 position = Vector2(-256, 96)
 
 [node name="Continue Arrow" parent="." instance=ExtResource("12_b4rpr")]
+visible = false
 position = Vector2(64, 32)
 
 [node name="Scene Transition" parent="." instance=ExtResource("13_sikmk")]
 position = Vector2(64, 224)
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("14_yxmq0")]
+visible = false
+position = Vector2(-512, -352)
+
+[connection signal="AmmoDecreased" from="Player" to="Camera2D/UI" method="decrementAmmo"]
+[connection signal="CollisionWithPressurePlate" from="Player" to="." method="pressurePlatePressed"]
+[connection signal="MovementDecreased" from="Player" to="Camera2D/UI" method="decrementMove"]
+[connection signal="NoAmmoLeft" from="Player" to="." method="loseScenario"]
+[connection signal="ReleasedPressurePlate" from="Player" to="." method="pressurePlateReleased"]
